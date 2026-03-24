@@ -1,11 +1,12 @@
 import { Video } from '@/types'
 
+// 默认视频数据
 export const mockVideos: Video[] = [
   {
     id: '1',
     title: '家庭钢琴合奏 - 致爱丽丝',
     description: '一家三口的温馨钢琴演奏，展现家庭音乐的和谐之美',
-    thumbnail: 'https://images.unsplash.com/photo-1552422535-c45813c61732?w=800&h=450&fit=crop',
+    thumbnail: '/images/thumbnails/piano-family.svg',
     videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
     performer: '张家庭',
     instrument: '钢琴',
@@ -20,7 +21,7 @@ export const mockVideos: Video[] = [
     id: '2',
     title: '吉他弹唱 - 时光倒流',
     description: '温馨的吉他弹唱，记录美好时光',
-    thumbnail: 'https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=800&h=450&fit=crop',
+    thumbnail: '/images/thumbnails/guitar-singing.svg',
     videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
     performer: '李明',
     instrument: '吉他',
@@ -33,24 +34,24 @@ export const mockVideos: Video[] = [
   },
   {
     id: '3',
-    title: '小提琴独奏 - 四季春',
-    description: '优美的小提琴独奏，感受春天的气息',
-    thumbnail: 'https://images.unsplash.com/photo-1507838153414-b4b713384ebd?w=800&h=450&fit=crop',
+    title: '大提琴独奏 - 四季春',
+    description: '优美的大提琴独奏，感受春天的气息',
+    thumbnail: '/images/thumbnails/cello.svg',
     videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
     performer: '王小雅',
-    instrument: '小提琴',
+    instrument: '大提琴',
     duration: '6:20',
     uploadedAt: '2024-01-08',
     views: 2341,
     likes: 156,
     category: 'violin',
-    tags: ['小提琴', '古典', '维瓦尔第']
+    tags: ['大提琴', '古典', '维瓦尔第']
   },
   {
     id: '4',
     title: '架子鼓表演 - 激情燃烧',
     description: '充满活力的架子鼓演奏，展现年轻活力',
-    thumbnail: 'https://images.unsplash.com/photo-1519892300165-cb5542fb47c7?w=800&h=450&fit=crop',
+    thumbnail: '/images/thumbnails/drums.svg',
     videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
     performer: '陈子轩',
     instrument: '架子鼓',
@@ -63,24 +64,24 @@ export const mockVideos: Video[] = [
   },
   {
     id: '5',
-    title: '古筝演奏 - 高山流水',
-    description: '传统古筝演奏，传承中华文化',
-    thumbnail: 'https://images.unsplash.com/photo-1514117445516-2ecfc9c4ec90?w=800&h=450&fit=crop',
+    title: '二胡演奏 - 高山流水',
+    description: '传统二胡演奏，传承中华文化',
+    thumbnail: '/images/thumbnails/erhu.svg',
     videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
     performer: '刘诗韵',
-    instrument: '古筝',
+    instrument: '二胡',
     duration: '7:10',
     uploadedAt: '2024-01-03',
     views: 3456,
     likes: 234,
     category: 'guzheng',
-    tags: ['古筝', '传统', '经典']
+    tags: ['二胡', '传统', '经典']
   },
   {
     id: '6',
     title: '家庭合唱 - 温馨家园',
     description: '全家一起合唱，传递爱与温暖',
-    thumbnail: 'https://images.unsplash.com/photo-1516280440614-6697288d5d38?w=800&h=450&fit=crop',
+    thumbnail: '/images/thumbnails/choir.svg',
     videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
     performer: '王家庭',
     instrument: '合唱',
@@ -93,12 +94,19 @@ export const mockVideos: Video[] = [
   },
 ]
 
-export const categories = [
-  { id: 'all', name: '全部', icon: '🎵', count: 6 },
-  { id: 'piano', name: '钢琴', icon: '🎹', count: 1 },
-  { id: 'guitar', name: '吉他', icon: '🎸', count: 1 },
-  { id: 'violin', name: '小提琴', icon: '🎻', count: 1 },
-  { id: 'drum', name: '架子鼓', icon: '🥁', count: 1 },
-  { id: 'guzheng', name: '古筝', icon: '🪕', count: 1 },
-  { id: 'vocal', name: '声乐', icon: '🎤', count: 1 },
-]
+// 根据视频数据动态生成分类
+export function getCategories(videos: Video[]) {
+  const categories = [
+    { id: 'all', name: '全部', icon: '🎵', count: videos.length },
+    { id: 'piano', name: '钢琴', icon: '🎹', count: videos.filter(v => v.category === 'piano').length },
+    { id: 'guitar', name: '吉他', icon: '🎸', count: videos.filter(v => v.category === 'guitar').length },
+    { id: 'violin', name: '大提琴', icon: '🎻', count: videos.filter(v => v.category === 'violin').length },
+    { id: 'drum', name: '架子鼓', icon: '🥁', count: videos.filter(v => v.category === 'drum').length },
+    { id: 'guzheng', name: '二胡', icon: '🪕', count: videos.filter(v => v.category === 'guzheng').length },
+    { id: 'vocal', name: '声乐', icon: '🎤', count: videos.filter(v => v.category === 'vocal').length },
+  ]
+  return categories
+}
+
+// 默认分类（用于初始化）
+export const categories = getCategories(mockVideos)

@@ -1,4 +1,4 @@
-import { Search, Plus, Music } from 'lucide-react'
+import { Search, Plus, Music, Images } from 'lucide-react'
 import Link from 'next/link'
 
 export function Header() {
@@ -7,12 +7,34 @@ export function Header() {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between py-4">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2">
-            <div className="rounded-full bg-gradient-to-br from-primary-500 to-primary-700 p-2">
-              <Music className="h-6 w-6 text-white" />
-            </div>
-            <span className="text-xl font-bold text-gray-900">iMusic</span>
-          </Link>
+          <div className="flex items-center gap-4">
+            <Link href="/" className="flex items-center gap-2">
+              <div className="rounded-full bg-gradient-to-br from-primary-500 to-primary-700 p-2">
+                <Music className="h-6 w-6 text-white" />
+              </div>
+              <span className="text-xl font-bold text-gray-900">IM 公益声传</span>
+            </Link>
+            <nav className="hidden md:flex items-center gap-4">
+              <Link
+                href="/"
+                className="text-sm font-medium text-gray-600 transition-colors hover:text-gray-900"
+              >
+                首页
+              </Link>
+              <Link
+                href="/gallery"
+                className="text-sm font-medium text-gray-600 transition-colors hover:text-gray-900"
+              >
+                活动剪影
+              </Link>
+              <Link
+                href="/about"
+                className="text-sm font-medium text-gray-600 transition-colors hover:text-gray-900"
+              >
+                关于社团
+              </Link>
+            </nav>
+          </div>
 
           {/* Search Bar */}
           <div className="hidden md:flex flex-1 max-w-xl mx-8">
