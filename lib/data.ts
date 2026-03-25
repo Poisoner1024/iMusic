@@ -95,15 +95,18 @@ export const mockVideos: Video[] = [
 ]
 
 // 根据视频数据动态生成分类
-export function getCategories(videos: Video[]) {
+export function getCategories(videos: Video[] = []) {
+  // 安全检查：确保videos是数组
+  const safeVideos = Array.isArray(videos) ? videos : []
+  
   const categories = [
-    { id: 'all', name: '全部', icon: '🎵', count: videos.length },
-    { id: 'piano', name: '钢琴', icon: '🎹', count: videos.filter(v => v.category === 'piano').length },
-    { id: 'guitar', name: '吉他', icon: '🎸', count: videos.filter(v => v.category === 'guitar').length },
-    { id: 'violin', name: '大提琴', icon: '🎻', count: videos.filter(v => v.category === 'violin').length },
-    { id: 'drum', name: '架子鼓', icon: '🥁', count: videos.filter(v => v.category === 'drum').length },
-    { id: 'guzheng', name: '二胡', icon: '🪕', count: videos.filter(v => v.category === 'guzheng').length },
-    { id: 'vocal', name: '声乐', icon: '🎤', count: videos.filter(v => v.category === 'vocal').length },
+    { id: 'all', name: '全部', icon: '🎵', count: safeVideos.length },
+    { id: 'piano', name: '钢琴', icon: '🎹', count: safeVideos.filter(v => v.category === 'piano').length },
+    { id: 'guitar', name: '吉他', icon: '🎸', count: safeVideos.filter(v => v.category === 'guitar').length },
+    { id: 'violin', name: '大提琴', icon: '🎻', count: safeVideos.filter(v => v.category === 'violin').length },
+    { id: 'drum', name: '架子鼓', icon: '🥁', count: safeVideos.filter(v => v.category === 'drum').length },
+    { id: 'guzheng', name: '二胡', icon: '🪕', count: safeVideos.filter(v => v.category === 'guzheng').length },
+    { id: 'vocal', name: '声乐', icon: '🎤', count: safeVideos.filter(v => v.category === 'vocal').length },
   ]
   return categories
 }

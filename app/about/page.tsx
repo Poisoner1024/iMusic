@@ -1,308 +1,319 @@
-import { Header } from '@/components/Header'
-import { Target, Trophy, Heart, Sparkles, Users, Play, Music } from 'lucide-react'
+'use client'
 
-export default function AboutPage() {
+import { Header } from '@/components/Header'
+import { 
+  Container, Section, Heading1, Heading2, Heading3, BodyText, Caption,
+  QuoteCard, GridLayout, HeroGrid
+} from '@/components/DesignSystem'
+import Image from 'next/image'
+import Link from 'next/link'
+import { ArrowLeft, Users, Heart, Music, Calendar, MapPin } from 'lucide-react'
+
+export default function About() {
+  const teamMembers = [
+    {
+      name: '创始人团队',
+      role: '核心发起人',
+      description: '由一群热爱音乐、关注家庭教育的专业人士组成，致力于推广公益音乐教育。',
+      image: '/images/gallery/page2_img4.jpeg'
+    },
+    {
+      name: '公益教师',
+      role: '专业指导',
+      description: '来自各音乐院校的专业教师，用爱心和专业指导每一个热爱音乐的孩子。',
+      image: '/images/gallery/page7_img7.jpeg'
+    },
+    {
+      name: '志愿者团队',
+      role: '活动支持',
+      description: '来自各行各业的爱心志愿者，为每一次活动提供全方位的支持与帮助。',
+      image: '/images/gallery/page8_img5.jpeg'
+    }
+  ]
+
+  const milestones = [
+    { year: '2024', event: 'IM公益声传社团成立', description: '正式启动家庭音乐公益项目' },
+    { year: '2024', event: '首场吉他公益课', description: '为50+孩子提供免费音乐教育' },
+    { year: '2024', event: '家庭乐团成立', description: '首个跨国家庭音乐团体诞生' },
+    { year: '2024', event: '社区公益路演', description: '走进社区传递音乐温暖' }
+  ]
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+    <div className="min-h-screen bg-white">
       <Header />
 
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-primary-600 via-primary-700 to-primary-800 py-20 text-white">
-        <div className="absolute inset-0 bg-black/20" />
-        <div className="container mx-auto relative px-4 text-center">
-          <h1 className="mb-4 text-5xl font-bold md:text-6xl">
-            IM 公益声传社团
-          </h1>
-          <p className="mb-8 text-2xl font-semibold text-primary-100">
-            把音乐快乐带给每个家庭
-          </p>
-          <p className="text-xl text-primary-100">
-            MUSIC HAPPY TO LIFE HAPPINESS
-          </p>
+      <Section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-primary-600 to-accent-600 text-white">
+        <div className="absolute inset-0">
+          <Image
+            src="/images/gallery/page2_img4.jpeg"
+            alt="IM公益声传社团"
+            fill
+            className="object-cover opacity-20"
+            priority
+          />
         </div>
-      </section>
+        
+        <Container>
+          <div className="text-center relative z-10">
+            <Link 
+              href="/" 
+              className="inline-flex items-center gap-2 mb-8 text-white/80 hover:text-white transition-colors"
+            >
+              <ArrowLeft className="h-4 w-4" />
+              返回首页
+            </Link>
+            
+            <Heading1 className="mb-4 text-white">
+              关于社团
+            </Heading1>
+            
+            <BodyText className="text-white/90 max-w-2xl mx-auto">
+              让每个家庭都能享受音乐的美好，MUSIC HAPPY TO LIFE HAPPINESS
+            </BodyText>
+          </div>
+        </Container>
+      </Section>
 
-      {/* 核心理念 */}
-      <section className="container mx-auto px-4 py-16">
-        <h2 className="mb-12 text-center text-4xl font-bold text-gray-900">
-          我们的理念
-        </h2>
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-          <div className="rounded-2xl bg-white p-8 text-center shadow-xl transition-transform hover:-translate-y-1">
-            <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-primary-100">
-              <Target className="h-10 w-10 text-primary-600" />
+      {/* 使命愿景 */}
+      <Section>
+        <Container>
+          <HeroGrid>
+            <div>
+              <Caption className="text-primary-600 font-semibold tracking-wider uppercase mb-3">
+                Our Mission
+              </Caption>
+              <Heading2 className="mb-6">
+                我们的使命
+              </Heading2>
+              <BodyText className="leading-relaxed mb-8">
+                把音乐快乐带给每个家庭
+              </BodyText>
+              
+              <Caption className="text-primary-600 font-semibold tracking-wider uppercase mb-3">
+                Our Vision
+              </Caption>
+              <Heading3 className="mb-4">
+                我们的愿景
+              </Heading3>
+              <BodyText className="leading-relaxed">
+                MUSIC HAPPY TO LIFE HAPPINESS
+              </BodyText>
             </div>
-            <h3 className="mb-4 text-2xl font-bold text-gray-900">使命</h3>
-            <p className="text-lg text-gray-600">
-              把音乐快乐带给每个家庭
-            </p>
-          </div>
-          <div className="rounded-2xl bg-white p-8 text-center shadow-xl transition-transform hover:-translate-y-1">
-            <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-primary-100">
-              <Trophy className="h-10 w-10 text-primary-600" />
+            
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-4">
+                <div className="relative h-48 rounded-2xl overflow-hidden">
+                  <Image
+                    src="/images/gallery/page9_img2.jpeg"
+                    alt="音乐表演"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+                <div className="relative h-64 rounded-2xl overflow-hidden">
+                  <Image
+                    src="/images/gallery/page7_img7.jpeg"
+                    alt="吉他练习"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              </div>
+              <div className="space-y-4 pt-8">
+                <div className="relative h-64 rounded-2xl overflow-hidden">
+                  <Image
+                    src="/images/gallery/page8_img5.jpeg"
+                    alt="户外活动"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+                <div className="relative h-48 rounded-2xl overflow-hidden">
+                  <Image
+                    src="/images/gallery/page9_img3.jpeg"
+                    alt="儿童合奏"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              </div>
             </div>
-            <h3 className="mb-4 text-2xl font-bold text-gray-900">愿景</h3>
-            <p className="text-lg text-gray-600">
-              MUSIC HAPPY TO LIFE HAPPINESS
-            </p>
-          </div>
-          <div className="rounded-2xl bg-white p-8 text-center shadow-xl transition-transform hover:-translate-y-1">
-            <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-primary-100">
-              <Heart className="h-10 w-10 text-primary-600" />
-            </div>
-            <h3 className="mb-4 text-2xl font-bold text-gray-900">理念</h3>
-            <p className="text-lg text-gray-600">
-              言传不如身教，身教不如境教
-            </p>
-          </div>
-          <div className="rounded-2xl bg-white p-8 text-center shadow-xl transition-transform hover:-translate-y-1">
-            <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-primary-100">
-              <Sparkles className="h-10 w-10 text-primary-600" />
-            </div>
-            <h3 className="mb-4 text-2xl font-bold text-gray-900">价值观</h3>
-            <p className="text-lg text-gray-600">
-              向前一步
-            </p>
-          </div>
-        </div>
-      </section>
+          </HeroGrid>
+        </Container>
+      </Section>
 
-      {/* IM 的含义 */}
-      <section className="bg-primary-50 py-16">
-        <div className="container mx-auto px-4">
-          <h2 className="mb-8 text-center text-4xl font-bold text-gray-900">
-            IM 的含义
-          </h2>
-          <div className="mx-auto max-w-4xl rounded-2xl bg-white p-12 shadow-xl">
-            <div className="space-y-6 text-lg text-gray-700">
-              <p>
-                <strong className="text-primary-600">IM</strong> 有"我"的含义
-              </p>
-              <ul className="ml-6 list-disc space-y-3">
-                <li>我们每一位会员都是 <strong>IM 的主角</strong></li>
-                <li>每一位都是 <strong>IM 的 leader</strong></li>
-                <li>IM 未来所有的成就和荣誉 <strong>归属于我们每一位会员</strong></li>
-              </ul>
-              <p className="mt-8">
-                在 IM，每一位会员都是主角，我们一起成长，共同创造美好的音乐世界。
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 创始人 */}
-      <section className="container mx-auto px-4 py-16">
-        <h2 className="mb-12 text-center text-4xl font-bold text-gray-900">
-          创始人
-        </h2>
-        <div className="mx-auto max-w-3xl rounded-2xl bg-gradient-to-br from-primary-600 to-primary-800 p-12 text-white shadow-xl">
-          <div className="text-center">
-            <div className="mb-6 text-6xl">MIYA & IRIS</div>
-            <div className="mb-8 space-y-4">
-              <p className="text-xl">Idea 的发起人</p>
-              <p className="text-xl">第一位 Founder</p>
-              <p className="text-xl">会员号 001 & 024</p>
-            </div>
-            <blockquote className="border-l-4 border-primary-300 pl-6 italic">
-              <p className="mb-4 text-2xl">
-                "我们的事业是什么？
-              </p>
-              <p className="mb-4 text-2xl">
-                我们的事业将是什么？
-              </p>
-              <p className="text-2xl">
-                我们的事业究竟应该是什么？"
-              </p>
-              <footer className="mt-6 text-sm text-primary-100">
-                —— 彼得·德鲁克
-              </footer>
-            </blockquote>
-            <blockquote className="mt-8 border-l-4 border-primary-300 pl-6 italic">
-              <p className="text-2xl">
-                "LET'S TOGETHER ENJOY MUSIC HAPPY TO LIFE HAPPINESS"
-              </p>
-              <footer className="mt-6 text-sm text-primary-100">
-                —— MIYA
-              </footer>
-            </blockquote>
-          </div>
-        </div>
-      </section>
-
-      {/* 核心活动 */}
-      <section className="bg-gray-50 py-16">
-        <div className="container mx-auto px-4">
-          <h2 className="mb-12 text-center text-4xl font-bold text-gray-900">
-            核心活动
-          </h2>
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            <div className="rounded-2xl bg-white p-8 shadow-xl transition-transform hover:-translate-y-1">
-              <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br from-primary-500 to-primary-600 text-4xl">
-                🎸
-              </div>
-              <h3 className="mb-4 text-2xl font-bold text-gray-900">
-                吉他公益课
-              </h3>
-              <div className="space-y-3 text-gray-600">
-                <p>
-                  <strong className="text-primary-600">核心：</strong>公益 NO PROFIT
-                </p>
-                <p>
-                  建设公益师资资源，美好的愿景
-                </p>
-              </div>
-            </div>
-            <div className="rounded-2xl bg-white p-8 shadow-xl transition-transform hover:-translate-y-1">
-              <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br from-primary-500 to-primary-600 text-4xl">
-                👨‍👩‍👧‍👦
-              </div>
-              <h3 className="mb-4 text-2xl font-bold text-gray-900">
-                家庭乐团
-              </h3>
-              <div className="space-y-3 text-gray-600">
-                <p>
-                  组建各种形式多元化多样化的家庭乐团 & 音乐会
-                </p>
-                <p>
-                  伟大的使命，美好的愿景
-                </p>
-              </div>
-            </div>
-            <div className="rounded-2xl bg-white p-8 shadow-xl transition-transform hover:-translate-y-1">
-              <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br from-primary-500 to-primary-600 text-4xl">
-                🎵
-              </div>
-              <h3 className="mb-4 text-2xl font-bold text-gray-900">
-                会员分享
-              </h3>
-              <div className="space-y-3 text-gray-600">
-                <p>
-                  分享加入声传公益社团的心路点滴
-                </p>
-                <p>
-                  Enjoy 家庭音乐
-                </p>
-              </div>
-            </div>
-            <div className="rounded-2xl bg-white p-8 shadow-xl transition-transform hover:-translate-y-1">
-              <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br from-primary-500 to-primary-600 text-4xl">
-                🎪
-              </div>
-              <h3 className="mb-4 text-2xl font-bold text-gray-900">
-                公益路演
-              </h3>
-              <div className="space-y-3 text-gray-600">
-                <p>
-                  组织 IM 公益路演，福利机构送温暖
-                </p>
-                <p>
-                  给社会有贡献的特殊单位组织音乐慰问
-                </p>
-              </div>
-            </div>
-            <div className="rounded-2xl bg-white p-8 shadow-xl transition-transform hover:-translate-y-1">
-              <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br from-primary-500 to-primary-600 text-4xl">
-                🤝
-              </div>
-              <h3 className="mb-4 text-2xl font-bold text-gray-900">
-                社区活动
-              </h3>
-              <div className="space-y-3 text-gray-600">
-                <p>
-                  支持社区活动
-                </p>
-                <p>
-                  偏远贫困区走访，找到更需要帮助的群体
-                </p>
-              </div>
-            </div>
-            <div className="rounded-2xl bg-white p-8 shadow-xl transition-transform hover:-translate-y-1">
-              <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br from-primary-500 to-primary-600 text-4xl">
-                🌍
-              </div>
-              <h3 className="mb-4 text-2xl font-bold text-gray-900">
-                国际交流
-              </h3>
-              <div className="space-y-3 text-gray-600">
-                <p>
-                  形式多样化的国际交流
-                </p>
-                <p>
-                  让音乐跨越国界
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 未来愿景 */}
-      <section className="container mx-auto px-4 py-16">
-        <h2 className="mb-12 text-center text-4xl font-bold text-gray-900">
-          未来愿景
-        </h2>
-        <div className="mx-auto max-w-5xl">
-          <div className="mb-12 rounded-2xl bg-gradient-to-br from-primary-50 to-primary-100 p-12 shadow-xl">
-            <h3 className="mb-6 text-2xl font-bold text-gray-900">
-              IM 是每一位会员的基地
-            </h3>
-            <p className="mb-4 text-lg text-gray-700">
-              家庭陪伴孩子们 & 社团一起共同成长，在 IM 萌发了小种子，激发孵化属于每一位会员"新的 IM"
-            </p>
-            <p className="text-lg text-gray-700">
-              孩子们成为更好的自己，每一个家庭幸福，为社会贡献一份来自感受音乐美好的力量
-            </p>
+      {/* 核心价值 */}
+      <Section className="bg-secondary-50">
+        <Container>
+          <div className="text-center mb-16">
+            <Caption className="text-primary-600 font-semibold tracking-wider uppercase mb-3">
+              Core Values
+            </Caption>
+            <Heading2 className="mb-4">
+              核心价值
+            </Heading2>
+          <BodyText className="max-w-2xl mx-auto">
+              言传不如身教，身教不如境教 - 向前一步，让每个家庭都能享受音乐的美好
+          </BodyText>
           </div>
 
-          <div className="grid gap-6 md:grid-cols-3">
-            <div className="rounded-2xl bg-white p-8 shadow-xl transition-transform hover:-translate-y-1">
-              <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-primary-100">
-                <Music className="h-8 w-8 text-primary-600" />
+          <GridLayout>
+            <div className="card-hover p-8 text-center">
+              <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Heart className="h-8 w-8 text-primary-600" />
               </div>
-              <h3 className="mb-4 text-xl font-bold text-gray-900">
-                中西合奏交响乐团
-              </h3>
-              <p className="text-gray-600">
-                鼓励会员们自我学习、自我创造，在这个人工智能的时代
-              </p>
+              <Heading3 className="mb-4">爱心公益</Heading3>
+              <BodyText>
+                坚持公益性质，为每个孩子提供平等的音乐学习机会，
+                让音乐教育不再有经济门槛。
+              </BodyText>
             </div>
-            <div className="rounded-2xl bg-white p-8 shadow-xl transition-transform hover:-translate-y-1">
-              <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-primary-100">
-                <Sparkles className="h-8 w-8 text-primary-600" />
-              </div>
-              <h3 className="mb-4 text-xl font-bold text-gray-900">
-                HK 注册 & 营地创办
-              </h3>
-              <p className="text-gray-600">
-                在香港申请注册 IM 公益社团，IM 营地创办
-              </p>
-            </div>
-            <div className="rounded-2xl bg-white p-8 shadow-xl transition-transform hover:-translate-y-1">
-              <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-primary-100">
+
+            <div className="card-hover p-8 text-center">
+              <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-6">
                 <Users className="h-8 w-8 text-primary-600" />
               </div>
-              <h3 className="mb-4 text-xl font-bold text-gray-900">
-                走向世界
-              </h3>
-              <p className="text-gray-600">
-                IM 走向中国 & 香港，走向世界
-              </p>
+              <Heading3 className="mb-4">家庭连接</Heading3>
+              <BodyText>
+                通过家庭音乐活动，增进亲子关系，
+                让音乐成为家庭成员之间情感交流的纽带。
+              </BodyText>
+            </div>
+
+            <div className="card-hover p-8 text-center">
+              <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Music className="h-8 w-8 text-primary-600" />
+              </div>
+              <Heading3 className="mb-4">专业指导</Heading3>
+              <BodyText>
+                由专业音乐教师提供指导，确保教学质量，
+                让每个孩子都能获得专业的音乐教育。
+              </BodyText>
+            </div>
+          </GridLayout>
+        </Container>
+      </Section>
+
+      {/* 发展历程 */}
+      <Section>
+        <Container>
+          <div className="text-center mb-16">
+            <Caption className="text-primary-600 font-semibold tracking-wider uppercase mb-3">
+              Our Journey
+            </Caption>
+            <Heading2 className="mb-4">
+              发展历程
+            </Heading2>
+            <BodyText className="max-w-2xl mx-auto">
+              从一个小小的想法开始，到如今服务100+个家庭的重要里程碑
+            </BodyText>
+          </div>
+
+          <div className="relative max-w-4xl mx-auto">
+            {/* 时间线 */}
+            <div className="absolute left-1/2 -translate-x-1/2 w-0.5 h-full bg-primary-200"></div>
+            
+            {milestones.map((milestone, index) => (
+              <div 
+                key={index}
+                className={`flex items-center mb-12 ${
+                  index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'
+                }`}
+              >
+                <div className={`w-1/2 ${index % 2 === 0 ? 'pr-8 text-right' : 'pl-8'}`}>
+                  <div className="card-hover p-6">
+                    <div className="text-2xl font-bold text-primary-600 mb-2">
+                      {milestone.year}
+                    </div>
+                    <Heading3 className="mb-2">{milestone.event}</Heading3>
+                    <BodyText className="text-gray-600">{milestone.description}</BodyText>
+                  </div>
+                </div>
+                
+                <div className="relative w-8 h-8 bg-primary-600 rounded-full border-4 border-white shadow-lg z-10"></div>
+                
+                <div className="w-1/2"></div>
+              </div>
+            ))}
+          </div>
+        </Container>
+      </Section>
+
+      {/* 团队介绍 */}
+      <Section className="bg-secondary-900 text-white">
+        <Container>
+          <div className="text-center mb-16">
+            <Caption className="text-primary-400 font-semibold tracking-wider uppercase mb-3">
+              Our Team
+            </Caption>
+            <Heading2 className="mb-4 text-white">
+              团队介绍
+            </Heading2>
+            <BodyText className="text-secondary-300 max-w-2xl mx-auto">
+              由专业音乐教师、爱心志愿者和热心家长组成的强大团队
+            </BodyText>
+          </div>
+
+          <GridLayout>
+            {teamMembers.map((member, index) => (
+              <div key={index} className="card-hover bg-secondary-800 overflow-hidden">
+                <div className="relative h-48">
+                  <Image
+                    src={member.image}
+                    alt={member.name}
+                    fill
+                    className="object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-secondary-900/80 to-transparent" />
+                </div>
+                <div className="p-6">
+                  <Heading3 className="text-white mb-2">{member.name}</Heading3>
+                  <Caption className="text-primary-400 mb-4">{member.role}</Caption>
+                  <BodyText className="text-secondary-300">{member.description}</BodyText>
+                </div>
+              </div>
+            ))}
+          </GridLayout>
+        </Container>
+      </Section>
+
+      {/* 创始人引言 */}
+      <Section>
+        <Container>
+          <div className="max-w-4xl mx-auto">
+            <QuoteCard
+              quote="言传不如身教，身教不如境教。我们希望通过音乐创造一个美好的环境，让每个孩子都能在音乐的陪伴下健康成长。"
+              author="IM公益声传创始人"
+              role="社团发起人"
+              location="2024年"
+            />
+          </div>
+        </Container>
+      </Section>
+
+      {/* CTA 区块 */}
+      <Section className="bg-gradient-to-r from-primary-600 to-accent-600 text-white">
+        <Container>
+          <div className="text-center">
+            <Heading2 className="mb-6 text-white">
+              加入我们，一起创造音乐的美好
+            </Heading2>
+            <BodyText className="text-white/90 mb-10 max-w-2xl mx-auto">
+              无论你是音乐爱好者、专业教师，还是热心家长，
+              都欢迎加入我们的大家庭，一起用音乐传递爱与温暖
+            </BodyText>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/upload" className="btn-secondary bg-white text-primary-600 hover:bg-gray-100">
+                分享你的音乐
+              </Link>
+              <Link href="/gallery" className="btn-outline text-white border-white hover:bg-white hover:text-gray-900">
+                查看活动剪影
+              </Link>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="border-t bg-gray-50 py-8">
-        <div className="container mx-auto px-4 text-center text-gray-600">
-          <p className="mb-2">© 2024 IM 公益声传社团</p>
-          <p className="mb-2">把音乐快乐带给每个家庭</p>
-          <p className="text-sm">
-            MUSIC HAPPY TO LIFE HAPPINESS
-          </p>
-        </div>
-      </footer>
+        </Container>
+      </Section>
     </div>
   )
 }

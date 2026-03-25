@@ -6,6 +6,10 @@ import Link from 'next/link'
 import { Header } from '@/components/Header'
 import { VideoCard } from '@/components/VideoCard'
 import { CategoryFilter } from '@/components/CategoryFilter'
+import { 
+  Container, Section, HeroSection, Heading1, Heading2, Heading3, BodyText, Caption,
+  StatNumber, TagCloud, QuoteCard, ProgramCard, GridLayout, HeroGrid
+} from '@/components/DesignSystem'
 import { mockVideos, getCategories } from '@/lib/data'
 import { galleryImages } from '@/lib/galleryData'
 import { getVideos } from '@/lib/videoStore'
@@ -18,50 +22,58 @@ import { Video } from '@/types'
 
 // 影响领域数据 - Playing For Change 风格标签云
 const impactAreas = [
-  { id: 'family', name: '家庭音乐', icon: '👨‍👩‍👧‍👦', color: 'from-rose-500 to-pink-600' },
-  { id: 'education', name: '公益教育', icon: '🎓', color: 'from-blue-500 to-cyan-600' },
-  { id: 'community', name: '社区活动', icon: '🏘️', color: 'from-green-500 to-emerald-600' },
-  { id: 'performance', name: '舞台演出', icon: '🎭', color: 'from-purple-500 to-violet-600' },
-  { id: 'charity', name: '公益路演', icon: '❤️', color: 'from-orange-500 to-amber-600' },
-  { id: 'heritage', name: '文化传承', icon: '📜', color: 'from-indigo-500 to-blue-600' },
-  { id: 'youth', name: '青少年培养', icon: '🌱', color: 'from-teal-500 to-cyan-600' },
-  { id: 'inclusion', name: '多元融合', icon: '🤝', color: 'from-fuchsia-500 to-pink-600' },
+  '家庭音乐', '公益教育', '社区活动', '舞台演出', 
+  '公益路演', '文化传承', '青少年培养', '多元融合'
 ]
 
 // 会员感言数据
 const testimonials = [
   {
-    id: 1,
     quote: "音乐让我的生活变得丰富多彩，在IM社团我找到了志同道合的朋友，一起享受音乐的美好。",
-    name: "王小雅",
+    author: "王小雅",
     role: "会员 001号",
-    age: "12岁",
-    instrument: "大提琴"
+    location: "12岁"
   },
   {
-    id: 2,
     quote: "带孩子参加家庭乐团活动是我们每周最期待的事情，音乐让我们全家更亲密。",
-    name: "张女士",
+    author: "张女士",
     role: "会员家长",
-    age: "",
-    instrument: "家庭合唱"
+    location: "家庭合唱"
   },
   {
-    id: 3,
     quote: "言传不如身教，身教不如境教。在这里，孩子们不仅学会了乐器，更懂得了什么是坚持和热爱。",
-    name: "李老师",
+    author: "李老师",
     role: "公益教师",
-    age: "",
-    instrument: "吉他"
+    location: "吉他教学"
   }
 ]
 
-// 统计数据
-const stats = [
-  { value: '100+', label: '会员家庭', icon: Users, color: 'text-rose-500' },
-  { value: '16', label: '活动剪影', icon: Camera, color: 'text-blue-500' },
-  { value: '6', label: '乐器类型', icon: Music, color: 'text-green-500' },
-  { value: '∞', label: '快乐传递', icon: Heart, color: 'text-purple-500' },
+// 核心活动数据
+const programs = [
+  {
+    title: '吉他公益课',
+    description: '核心：公益 NO PROFIT，建设公益师资资源。为每一个热爱音乐的孩子提供免费学习机会。',
+    highlight: '免费音乐教育 · 专业师资团队',
+    image: '/images/gallery/page7_img7.jpeg',
+    location: '北京',
+    participants: '每周 50+ 学员'
+  },
+  {
+    title: '家庭乐团',
+    description: '多元化多样化的家庭乐团 & 音乐会，让音乐成为家庭情感的纽带。',
+    highlight: '亲子合奏 · 定期音乐会 · 跨越国界',
+    image: '/images/gallery/page11_img2.jpeg',
+    location: '全国',
+    participants: '100+ 家庭参与'
+  },
+  {
+    title: '公益路演',
+    description: '社会公益音乐活动，用音乐温暖每一个角落，传递爱的力量。',
+    highlight: '福利机构送温暖 · 社区活动支持',
+    image: '/images/gallery/page8_img5.jpeg',
+    location: '各地社区',
+    participants: '16 场活动'
+  }
 ]
 
 export default function Home() {
@@ -99,8 +111,8 @@ export default function Home() {
       <Header />
 
       {/* Hero Section - Playing For Change 风格 */}
-      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
-        {/* 背景图片轮播效果 */}
+      <HeroSection className="relative overflow-hidden">
+        {/* 背景图片 */}
         <div className="absolute inset-0">
           <Image
             src="/images/gallery/page2_img4.jpeg"
@@ -110,64 +122,60 @@ export default function Home() {
             priority
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80" />
+          
+          {/* 主题文字叠加在图片上 */}
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="text-center text-white px-4">
+              <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold leading-tight tracking-tight mb-4">
+                <span className="block text-white/90 mb-2">让每个家庭</span>
+                <span className="gradient-text bg-gradient-to-r from-amber-300 via-rose-300 to-purple-300 bg-clip-text text-transparent drop-shadow-2xl">
+                  享受音乐的美好
+                </span>
+              </h1>
+              <div className="w-32 h-1 bg-gradient-to-r from-amber-300 via-rose-300 to-purple-300 mx-auto mb-6 rounded-full"></div>
+            </div>
+          </div>
         </div>
 
         {/* Hero 内容 */}
-        <div className="relative z-10 container mx-auto px-4 text-center text-white">
-          {/* 副标题 */}
-          <p className="mb-6 text-lg md:text-xl font-medium tracking-widest text-white/80 uppercase">
-            MUSIC the heartbeat of family happiness
-          </p>
-          
-          {/* 主标题 */}
-          <h1 className="mb-8 text-5xl md:text-7xl lg:text-8xl font-bold leading-tight">
-            <span className="block mb-2">让每个家庭</span>
-            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-rose-300 to-purple-300">
-              享受音乐的美好
-            </span>
-          </h1>
-          
-          {/* 理念标语 */}
-          <p className="mb-10 text-xl md:text-2xl text-white/90 max-w-3xl mx-auto leading-relaxed">
-            言传不如身教，身教不如境教
-            <span className="block mt-2 text-lg text-white/70">— 向前一步，让音乐传递爱与快乐</span>
-          </p>
+        <Container>
+          <div className="text-center text-white pt-32">
+            {/* 副标题 */}
+            <Caption className="mb-6 text-lg md:text-xl tracking-widest uppercase text-white/80">
+              MUSIC the heartbeat of family happiness
+            </Caption>
+            
+            {/* 理念标语 */}
+            <BodyText className="mb-10 max-w-3xl mx-auto text-white/90">
+              言传不如身教，身教不如境教
+              <span className="block mt-2 text-lg text-white/70">— 向前一步，让音乐传递爱与快乐</span>
+            </BodyText>
 
-          {/* CTA 按钮 */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
-            <Link
-              href="/gallery"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-rose-600 hover:bg-rose-700 text-white font-semibold rounded-full transition-all transform hover:scale-105"
-            >
-              <Play className="h-5 w-5" />
-              探索我们的故事
-            </Link>
-            <Link
-              href="/upload"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white font-semibold rounded-full transition-all border border-white/30"
-            >
-              <Music className="h-5 w-5" />
-              分享你的音乐
-            </Link>
-          </div>
+            {/* CTA 按钮 */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
+              <Link href="/gallery" className="btn-primary">
+                <Play className="h-5 w-5" />
+                探索我们的故事
+              </Link>
+              <Link href="/upload" className="btn-outline text-white border-white hover:bg-white hover:text-gray-900">
+                <Music className="h-5 w-5" />
+                分享你的音乐
+              </Link>
+            </div>
 
-          {/* 统计数据 - 大数字展示 */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
-            {[
-              { value: videos.length, label: '音乐视频', suffix: '' },
-              { value: new Set(videos.map(v => v.performer)).size, label: '会员', suffix: '+' },
-              { value: videos.reduce((sum, v) => sum + v.likes, 0), label: '爱心', suffix: '' },
-              { value: 16, label: '活动剪影', suffix: '' },
-            ].map((stat, idx) => (
-              <div key={idx} className="text-center">
-                <div className="text-4xl md:text-5xl font-bold text-white mb-1">
-                  {stat.value}{stat.suffix}
-                </div>
-                <div className="text-sm text-white/70 uppercase tracking-wider">{stat.label}</div>
-              </div>
-            ))}
+            {/* 统计数据 */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+              {[
+                { number: videos.length.toString(), label: '音乐视频' },
+                { number: `${new Set(videos.map(v => v.performer)).size}+`, label: '会员' },
+                { number: videos.reduce((sum, v) => sum + v.likes, 0).toString(), label: '爱心' },
+                { number: '16', label: '活动剪影' },
+              ].map((stat, idx) => (
+                <StatNumber key={idx} number={stat.number} label={stat.label} />
+              ))}
+            </div>
           </div>
-        </div>
+        </Container>
 
         {/* 滚动提示 */}
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
@@ -175,61 +183,55 @@ export default function Home() {
             <div className="w-1 h-2 bg-white/70 rounded-full" />
           </div>
         </div>
-      </section>
+      </HeroSection>
 
       {/* 影响领域 - Playing For Change 风格标签云 */}
-      <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
-        <div className="container mx-auto px-4">
+      <Section className="gradient-bg">
+        <Container>
           <div className="text-center mb-12">
-            <p className="text-rose-600 font-semibold tracking-wider uppercase mb-3">AREAS OF IMPACT</p>
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <Caption className="text-primary-600 font-semibold tracking-wider uppercase mb-3">
+              AREAS OF IMPACT
+            </Caption>
+            <Heading2 className="mb-4">
               我们的影响领域
-            </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
+            </Heading2>
+            <BodyText className="max-w-2xl mx-auto">
               感受音乐带来的改变，了解我们在各个领域的努力与成果
-            </p>
+            </BodyText>
           </div>
 
-          <div className="flex flex-wrap justify-center gap-4 max-w-5xl mx-auto">
-            {impactAreas.map((area) => (
-              <div
-                key={area.id}
-                className={`group px-6 py-4 rounded-2xl bg-gradient-to-r ${area.color} text-white shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1 cursor-pointer`}
-              >
-                <span className="text-2xl mr-2">{area.icon}</span>
-                <span className="font-semibold">{area.name}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+          <TagCloud tags={impactAreas} />
+        </Container>
+      </Section>
 
       {/* 使命宣言区块 */}
-      <section className="py-20 bg-gray-900 text-white">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+      <Section className="bg-secondary-900 text-white">
+        <Container>
+          <HeroGrid>
             <div>
-              <p className="text-rose-400 font-semibold tracking-wider uppercase mb-4">Our Mission</p>
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+              <Caption className="text-primary-400 font-semibold tracking-wider uppercase mb-4">
+                Our Mission
+              </Caption>
+              <Heading2 className="mb-6 text-white leading-tight">
                 把音乐快乐<br />带给每个家庭
-              </h2>
-              <p className="text-gray-300 text-lg leading-relaxed mb-8">
+              </Heading2>
+              <BodyText className="text-secondary-300 leading-relaxed mb-8">
                 IM 公益声传社团致力于为每一个热爱音乐的家庭提供学习和交流的平台。
                 我们相信，音乐不仅能够陶冶情操，更能增进家庭成员之间的情感连接，
                 让每个家庭都能在音乐的陪伴下共同成长。
-              </p>
+              </BodyText>
               <div className="flex gap-8">
                 <div>
-                  <div className="text-3xl font-bold text-rose-400">2024</div>
-                  <div className="text-gray-400 text-sm">成立年份</div>
+                  <div className="text-3xl font-bold text-primary-400">2024</div>
+                  <Caption>成立年份</Caption>
                 </div>
                 <div>
-                  <div className="text-3xl font-bold text-rose-400">100+</div>
-                  <div className="text-gray-400 text-sm">会员家庭</div>
+                  <div className="text-3xl font-bold text-primary-400">100+</div>
+                  <Caption>会员家庭</Caption>
                 </div>
                 <div>
-                  <div className="text-3xl font-bold text-rose-400">∞</div>
-                  <div className="text-gray-400 text-sm">美好传递</div>
+                  <div className="text-3xl font-bold text-primary-400">∞</div>
+                  <Caption>美好传递</Caption>
                 </div>
               </div>
             </div>
@@ -273,179 +275,89 @@ export default function Home() {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
+          </HeroGrid>
+        </Container>
+      </Section>
 
       {/* 会员感言 - Testimonials */}
-      <section className="py-20 bg-gradient-to-br from-rose-50 via-white to-purple-50">
-        <div className="container mx-auto px-4">
+      <Section className="gradient-bg">
+        <Container>
           <div className="text-center mb-16">
-            <p className="text-rose-600 font-semibold tracking-wider uppercase mb-3">Testimonials</p>
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
+            <Caption className="text-primary-600 font-semibold tracking-wider uppercase mb-3">
+              Testimonials
+            </Caption>
+            <Heading2>
               他们的心声
-            </h2>
+            </Heading2>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {testimonials.map((testimonial) => (
-              <div
-                key={testimonial.id}
-                className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow relative"
-              >
-                <Quote className="absolute top-6 right-6 h-10 w-10 text-rose-200" />
-                <p className="text-gray-700 text-lg leading-relaxed mb-6 italic">
-                  &ldquo;{testimonial.quote}&rdquo;
-                </p>
-                <div className="border-t pt-4">
-                  <div className="font-bold text-gray-900">{testimonial.name}</div>
-                  <div className="text-rose-600 text-sm">{testimonial.role}</div>
-                  {testimonial.age && (
-                    <div className="text-gray-500 text-sm">{testimonial.age} · {testimonial.instrument}</div>
-                  )}
-                </div>
-              </div>
+          <GridLayout>
+            {testimonials.map((testimonial, idx) => (
+              <QuoteCard
+                key={idx}
+                quote={testimonial.quote}
+                author={testimonial.author}
+                role={testimonial.role}
+                location={testimonial.location}
+              />
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 活动剪影 - Stories from the Ground */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-12">
-            <div>
-              <p className="text-rose-600 font-semibold tracking-wider uppercase mb-3">Stories from the Ground</p>
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
-                活动剪影
-              </h2>
-            </div>
-            <Link
-              href="/gallery"
-              className="inline-flex items-center gap-2 text-rose-600 font-semibold hover:text-rose-700 transition-colors mt-4 md:mt-0"
-            >
-              查看全部照片
-              <ArrowRight className="h-5 w-5" />
-            </Link>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {featuredImages.map((image, idx) => (
-              <Link
-                key={image.id}
-                href="/gallery"
-                className="group relative aspect-[4/3] rounded-2xl overflow-hidden shadow-lg"
-              >
-                <Image
-                  src={image.src}
-                  alt={image.title}
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                  <h3 className="text-white font-bold text-lg">{image.title}</h3>
-                  <p className="text-white/80 text-sm line-clamp-2">{image.description}</p>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
+          </GridLayout>
+        </Container>
+      </Section>
 
       {/* 核心活动 - Program Cards */}
-      <section className="py-20 bg-gray-50">
-        <div className="container mx-auto px-4">
+      <Section className="bg-secondary-50">
+        <Container>
           <div className="text-center mb-16">
-            <p className="text-rose-600 font-semibold tracking-wider uppercase mb-3">Our Programs</p>
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <Caption className="text-primary-600 font-semibold tracking-wider uppercase mb-3">
+              Our Programs
+            </Caption>
+            <Heading2 className="mb-4">
               核心活动
-            </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
+            </Heading2>
+            <BodyText className="max-w-2xl mx-auto">
               多元化的音乐活动，让每一个家庭都能找到属于自己的音乐之路
-            </p>
+            </BodyText>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {[
-              {
-                title: '吉他公益课',
-                subtitle: 'GUITAR FOR ALL',
-                description: '核心：公益 NO PROFIT，建设公益师资资源。为每一个热爱音乐的孩子提供免费学习机会。',
-                highlight: '免费音乐教育 · 专业师资团队',
-                image: '/images/gallery/page7_img7.jpeg',
-                color: 'from-amber-500 to-orange-600'
-              },
-              {
-                title: '家庭乐团',
-                subtitle: 'FAMILY ORCHESTRA',
-                description: '多元化多样化的家庭乐团 & 音乐会，让音乐成为家庭情感的纽带。',
-                highlight: '亲子合奏 · 定期音乐会 · 跨越国界',
-                image: '/images/gallery/page11_img2.jpeg',
-                color: 'from-rose-500 to-pink-600'
-              },
-              {
-                title: '公益路演',
-                subtitle: 'CHARITY PERFORMANCE',
-                description: '社会公益音乐活动，用音乐温暖每一个角落，传递爱的力量。',
-                highlight: '福利机构送温暖 · 社区活动支持',
-                image: '/images/gallery/page8_img5.jpeg',
-                color: 'from-purple-500 to-violet-600'
-              }
-            ].map((program, idx) => (
-              <div key={idx} className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
-                <div className="relative h-48 overflow-hidden">
-                  <Image
-                    src={program.image}
-                    alt={program.title}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                  <div className={`absolute inset-0 bg-gradient-to-t ${program.color} opacity-60`} />
-                  <div className="absolute bottom-4 left-4 text-white">
-                    <p className="text-xs font-semibold tracking-wider opacity-80">{program.subtitle}</p>
-                    <h3 className="text-2xl font-bold">{program.title}</h3>
-                  </div>
-                </div>
-                <div className="p-6">
-                  <p className="text-gray-600 mb-4 leading-relaxed">{program.description}</p>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {program.highlight.split(' · ').map((tag, i) => (
-                      <span key={i} className="px-3 py-1 bg-gray-100 text-gray-600 text-sm rounded-full">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                  <button className="text-rose-600 font-semibold flex items-center gap-1 group-hover:gap-2 transition-all">
-                    了解更多 <ChevronRight className="h-4 w-4" />
-                  </button>
-                </div>
-              </div>
+          <GridLayout>
+            {programs.map((program, idx) => (
+              <ProgramCard
+                key={idx}
+                title={program.title}
+                description={program.description}
+                highlight={program.highlight}
+                image={program.image}
+                location={program.location}
+                participants={program.participants}
+              />
             ))}
-          </div>
-        </div>
-      </section>
+          </GridLayout>
+        </Container>
+      </Section>
 
       {/* 视频板块 */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4">
+      <Section>
+        <Container>
           <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-8">
             <div>
-              <p className="text-rose-600 font-semibold tracking-wider uppercase mb-3">Music Videos</p>
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
+              <Caption className="text-primary-600 font-semibold tracking-wider uppercase mb-3">
+                Music Videos
+              </Caption>
+              <Heading2>
                 精选视频
-              </h2>
+              </Heading2>
             </div>
             <CategoryFilter
-              categories={categories}
+              videos={videos}
               selectedCategory={selectedCategory}
-              onSelect={setSelectedCategory}
+              onCategoryChange={setSelectedCategory}
             />
           </div>
 
           {loading ? (
             <div className="flex items-center justify-center py-20">
-              <div className="h-8 w-8 animate-spin rounded-full border-4 border-rose-600 border-t-transparent" />
+              <div className="h-8 w-8 animate-spin rounded-full border-4 border-primary-600 border-t-transparent" />
             </div>
           ) : (
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
@@ -458,56 +370,52 @@ export default function Home() {
           {filteredVideos.length === 0 && (
             <div className="py-20 text-center">
               <div className="mb-4 text-6xl">🎵</div>
-              <h3 className="mb-2 text-xl font-semibold text-gray-900">暂无视频</h3>
-              <p className="text-gray-600">该分类下还没有视频，快来发布第一个吧！</p>
+              <Heading3 className="mb-2">暂无视频</Heading3>
+              <BodyText>该分类下还没有视频，快来发布第一个吧！</BodyText>
             </div>
           )}
-        </div>
-      </section>
+        </Container>
+      </Section>
 
       {/* CTA 区块 */}
-      <section className="py-20 bg-gradient-to-r from-rose-600 to-purple-700 text-white">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-5xl font-bold mb-6">
-            准备好开始你的音乐之旅了吗？
-          </h2>
-          <p className="text-xl text-white/90 mb-10 max-w-2xl mx-auto">
-            加入我们，和100+个家庭一起，用音乐创造美好回忆
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="/upload"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-rose-600 font-semibold rounded-full hover:bg-gray-100 transition-colors"
-            >
-              <Play className="h-5 w-5" />
-              分享你的音乐
-            </Link>
-            <Link
-              href="/about"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white/10 backdrop-blur-sm text-white font-semibold rounded-full hover:bg-white/20 transition-colors border border-white/30"
-            >
-              了解更多
-            </Link>
+      <Section className="bg-gradient-to-r from-primary-600 to-accent-600 text-white">
+        <Container>
+          <div className="text-center">
+            <Heading2 className="mb-6 text-white">
+              准备好开始你的音乐之旅了吗？
+            </Heading2>
+            <BodyText className="text-white/90 mb-10 max-w-2xl mx-auto">
+              加入我们，和100+个家庭一起，用音乐创造美好回忆
+            </BodyText>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/upload" className="btn-secondary bg-white text-primary-600 hover:bg-gray-100">
+                <Play className="h-5 w-5" />
+                分享你的音乐
+              </Link>
+              <Link href="/about" className="btn-outline text-white border-white hover:bg-white hover:text-gray-900">
+                了解更多
+              </Link>
+            </div>
           </div>
-        </div>
-      </section>
+        </Container>
+      </Section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-16">
-        <div className="container mx-auto px-4">
+      <footer className="bg-secondary-900 text-white py-16">
+        <Container>
           <div className="grid md:grid-cols-4 gap-8 mb-12">
             <div>
-              <h3 className="text-2xl font-bold mb-4">IM 公益声传</h3>
-              <p className="text-gray-400 mb-4">
+              <Heading3 className="mb-4 text-white">IM 公益声传</Heading3>
+              <BodyText className="text-secondary-400 mb-4">
                 让每个家庭享受音乐的美好
-              </p>
-              <p className="text-gray-500 text-sm">
+              </BodyText>
+              <Caption>
                 MUSIC HAPPY TO LIFE HAPPINESS
-              </p>
+              </Caption>
             </div>
             <div>
               <h4 className="font-semibold mb-4">快速链接</h4>
-              <ul className="space-y-2 text-gray-400">
+              <ul className="space-y-2 text-secondary-400">
                 <li><Link href="/" className="hover:text-white transition-colors">首页</Link></li>
                 <li><Link href="/gallery" className="hover:text-white transition-colors">活动剪影</Link></li>
                 <li><Link href="/about" className="hover:text-white transition-colors">关于社团</Link></li>
@@ -516,7 +424,7 @@ export default function Home() {
             </div>
             <div>
               <h4 className="font-semibold mb-4">核心活动</h4>
-              <ul className="space-y-2 text-gray-400">
+              <ul className="space-y-2 text-secondary-400">
                 <li>吉他公益课</li>
                 <li>家庭乐团</li>
                 <li>公益路演</li>
@@ -525,18 +433,16 @@ export default function Home() {
             </div>
             <div>
               <h4 className="font-semibold mb-4">联系我们</h4>
-              <p className="text-gray-400 text-sm">
+              <BodyText className="text-secondary-400">
                 让音乐成为连接每个家庭的桥梁
-              </p>
+              </BodyText>
             </div>
           </div>
-          <div className="border-t border-gray-800 pt-8 text-center text-gray-500">
-            <p>© 2024 IM 公益声传社团. 让每个家庭享受音乐的美好</p>
+          <div className="border-t border-secondary-800 pt-8 text-center text-secondary-500">
+            <Caption>© 2024 IM 公益声传社团. 让每个家庭享受音乐的美好</Caption>
           </div>
-        </div>
+        </Container>
       </footer>
     </div>
   )
 }
-
-

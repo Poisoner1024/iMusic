@@ -20,7 +20,7 @@
 | page7_img8.jpeg | 53KB | 户外吉他练习 |
 | page7_img9.jpeg | 55KB | 户外双人吉他练习 |
 | page8_img5.jpeg | 173KB | 户外二胡+吉他合奏 |
-| page8_img6.jpeg | 126KB | 家庭音乐时光 |
+| page11_img2.jpeg | 77KB | 家庭音乐时光 |
 | page9_img2.jpeg | 44KB | 室内音乐表演 |
 | page9_img3.jpeg | 44KB | 儿童大提琴+二胡合奏 |
 | page9_img4.jpeg | 44KB | 儿童单簧管演奏 |

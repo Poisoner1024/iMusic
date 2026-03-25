@@ -106,7 +106,7 @@ export const galleryImages: GalleryImage[] = [
   // 家庭音乐
   {
     id: '12',
-    src: '/images/gallery/page8_img6.jpeg',
+    src: '/images/gallery/page11_img2.jpeg',
     title: '家庭音乐时光',
     description: '一家人在一起享受音乐的美好时光',
     category: 'family',
