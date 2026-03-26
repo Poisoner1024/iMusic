@@ -5,12 +5,12 @@ import './globals.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'IM公益声传 - 音乐驱动家庭美好',
-  description: '让每个家庭享受音乐的美好，通过音乐连接社区，传递温暖与希望',
-  keywords: '公益音乐,家庭乐团,社区活动,音乐教育,IM公益声传',
+  title: 'IM公益声传社团 - 把音乐快乐带给每个家庭',
+  description: 'MUSIC HAPPY TO LIFE HAPPINESS - IM公益声传社团由IRIS与MIYA发起，致力于通过音乐让每个家庭感受音乐的快乐，享受生活的幸福',
+  keywords: 'IM公益声传,公益音乐,家庭乐团,亲子音乐,吉他公益课,音乐教育,音乐公益',
   openGraph: {
-    title: 'IM公益声传 - 音乐驱动家庭美好',
-    description: '让每个家庭享受音乐的美好，通过音乐连接社区，传递温暖与希望',
+    title: 'IM公益声传社团 - 把音乐快乐带给每个家庭',
+    description: 'MUSIC HAPPY TO LIFE HAPPINESS - 言传不如身教，身教不如境教',
     type: 'website',
     locale: 'zh_CN',
   },

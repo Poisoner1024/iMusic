@@ -110,9 +110,9 @@ export default function Home() {
     <div className="min-h-screen bg-white">
       <Header />
 
-      {/* Hero Section - Playing For Change 风格 */}
+      {/* Hero Section - 根据需求文档重新设计 */}
       <HeroSection className="relative overflow-hidden">
-        {/* 背景图片 */}
+        {/* 背景图片轮播 */}
         <div className="absolute inset-0">
           <Image
             src="/images/gallery/page2_img4.jpeg"
@@ -122,56 +122,53 @@ export default function Home() {
             priority
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80" />
-          
-          {/* 主题文字叠加在图片上 */}
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="text-center text-white px-4">
-              <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold leading-tight tracking-tight mb-4">
-                <span className="block text-white/90 mb-2">让每个家庭</span>
-                <span className="gradient-text bg-gradient-to-r from-amber-300 via-rose-300 to-purple-300 bg-clip-text text-transparent drop-shadow-2xl">
-                  享受音乐的美好
-                </span>
-              </h1>
-              <div className="w-32 h-1 bg-gradient-to-r from-amber-300 via-rose-300 to-purple-300 mx-auto mb-6 rounded-full"></div>
-            </div>
-          </div>
         </div>
 
         {/* Hero 内容 */}
         <Container>
-          <div className="text-center text-white pt-32">
+          <div className="text-center text-white pt-32 pb-20">
+            {/* 核心 Slogan */}
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight mb-6">
+              <span className="block bg-gradient-to-r from-amber-300 via-rose-300 to-purple-300 bg-clip-text text-transparent drop-shadow-2xl">
+                让每个家庭都能享受音乐的美好
+              </span>
+            </h1>
+            
             {/* 副标题 */}
-            <Caption className="mb-6 text-lg md:text-xl tracking-widest uppercase text-white/80">
-              MUSIC the heartbeat of family happiness
+            <Caption className="mb-8 text-lg md:text-xl tracking-widest uppercase text-white/80">
+              MUSIC HAPPY TO LIFE HAPPINESS
             </Caption>
             
             {/* 理念标语 */}
-            <BodyText className="mb-10 max-w-3xl mx-auto text-white/90">
+            <BodyText className="mb-12 max-w-3xl mx-auto text-white/90 text-lg">
               言传不如身教，身教不如境教
-              <span className="block mt-2 text-lg text-white/70">— 向前一步，让音乐传递爱与快乐</span>
+              <span className="block mt-2 text-white/70">— 向前一步，让音乐传递爱与快乐</span>
             </BodyText>
 
             {/* CTA 按钮 */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
-              <Link href="/gallery" className="btn-primary">
-                <Play className="h-5 w-5" />
-                探索我们的故事
+              <Link href="/about" className="btn-primary">
+                <BookOpen className="h-5 w-5" />
+                了解社团
               </Link>
-              <Link href="/upload" className="btn-outline text-white border-white hover:bg-white hover:text-gray-900">
-                <Music className="h-5 w-5" />
-                分享你的音乐
+              <Link href="/join" className="btn-outline text-white border-white hover:bg-white hover:text-gray-900">
+                <Users2 className="h-5 w-5" />
+                申请加入
               </Link>
             </div>
 
-            {/* 统计数据 */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+            {/* 社团数字亮点栏 */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
               {[
-                { number: videos.length.toString(), label: '音乐视频' },
-                { number: `${new Set(videos.map(v => v.performer)).size}+`, label: '会员' },
-                { number: videos.reduce((sum, v) => sum + v.likes, 0).toString(), label: '爱心' },
-                { number: '16', label: '活动剪影' },
+                { number: '100+', label: '会员家庭' },
+                { number: '16+', label: '活动场次' },
+                { number: '50+', label: '公益课时' },
+                { number: '5+', label: '覆盖城市' },
               ].map((stat, idx) => (
-                <StatNumber key={idx} number={stat.number} label={stat.label} />
+                <div key={idx} className="text-center">
+                  <div className="text-3xl md:text-4xl font-bold text-white mb-2">{stat.number}</div>
+                  <div className="text-sm text-white/80 uppercase tracking-wider">{stat.label}</div>
+                </div>
               ))}
             </div>
           </div>

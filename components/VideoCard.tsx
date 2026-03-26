@@ -1,24 +1,34 @@
 import { Video } from '@/types'
-import { Play, Eye, Heart, Users, Globe } from 'lucide-react'
+import { Play, Eye, Heart, Users, Globe, Music } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useState } from 'react'
 
 interface VideoCardProps {
   video: Video
 }
 
 export function VideoCard({ video }: VideoCardProps) {
+  const [imgError, setImgError] = useState(false)
+
   return (
     <Link href={`/video/${video.id}`}>
       <div className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-white/90 to-white/70 backdrop-blur-sm border border-white/50 shadow-xl transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 hover:scale-105">
         {/* Thumbnail */}
         <div className="relative aspect-video overflow-hidden">
-          <Image
-            src={video.thumbnail}
-            alt={video.title}
-            fill
-            className="object-cover transition-transform duration-500 group-hover:scale-110"
-          />
+          {!imgError ? (
+            <Image
+              src={video.thumbnail}
+              alt={video.title}
+              fill
+              className="object-cover transition-transform duration-500 group-hover:scale-110"
+              onError={() => setImgError(true)}
+            />
+          ) : (
+            <div className="w-full h-full bg-gradient-to-br from-purple-200 to-blue-200 flex items-center justify-center">
+              <Music className="h-16 w-16 text-purple-600 opacity-50" />
+            </div>
+          )}
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
           <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:scale-110">
             <div className="rounded-full bg-gradient-to-r from-purple-600/90 to-blue-600/90 p-5 shadow-2xl border border-white/20">

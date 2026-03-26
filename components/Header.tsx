@@ -1,4 +1,4 @@
-import { Search, Plus, Music } from 'lucide-react'
+import { Search, Plus, Music, Home, Users, Calendar, BookOpen, Star, Heart, Globe, Mail } from 'lucide-react'
 import Link from 'next/link'
 
 export function Header() {
@@ -7,7 +7,7 @@ export function Header() {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between py-4">
           {/* Logo */}
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-4">
             <Link href="/" className="flex items-center gap-3 group">
               <div className="rounded-full bg-gradient-to-br from-rose-500 to-purple-600 p-2.5 shadow-lg group-hover:shadow-xl transition-shadow">
                 <Music className="h-6 w-6 text-white" />
@@ -16,30 +16,67 @@ export function Header() {
                 IM 公益声传
               </span>
             </Link>
-            <nav className="hidden md:flex items-center gap-1">
+            <nav className="hidden lg:flex items-center gap-1">
               <Link
                 href="/"
-                className="px-4 py-2 text-sm font-medium text-gray-600 rounded-full hover:bg-rose-50 hover:text-rose-600 transition-all"
+                className="px-3 py-2 text-sm font-medium text-gray-600 rounded-lg hover:bg-rose-50 hover:text-rose-600 transition-all"
               >
+                <Home className="h-4 w-4 inline mr-1" />
                 首页
               </Link>
               <Link
-                href="/gallery"
-                className="px-4 py-2 text-sm font-medium text-gray-600 rounded-full hover:bg-rose-50 hover:text-rose-600 transition-all"
+                href="/about"
+                className="px-3 py-2 text-sm font-medium text-gray-600 rounded-lg hover:bg-rose-50 hover:text-rose-600 transition-all"
               >
-                活动剪影
+                关于我们
               </Link>
               <Link
-                href="/about"
-                className="px-4 py-2 text-sm font-medium text-gray-600 rounded-full hover:bg-rose-50 hover:text-rose-600 transition-all"
+                href="/join"
+                className="px-3 py-2 text-sm font-medium text-gray-600 rounded-lg hover:bg-rose-50 hover:text-rose-600 transition-all"
               >
-                关于社团
+                <Users className="h-4 w-4 inline mr-1" />
+                加入我们
+              </Link>
+              <Link
+                href="/activities"
+                className="px-3 py-2 text-sm font-medium text-gray-600 rounded-lg hover:bg-rose-50 hover:text-rose-600 transition-all"
+              >
+                <Calendar className="h-4 w-4 inline mr-1" />
+                活动动态
+              </Link>
+              <Link
+                href="/classes"
+                className="px-3 py-2 text-sm font-medium text-gray-600 rounded-lg hover:bg-rose-50 hover:text-rose-600 transition-all"
+              >
+                <BookOpen className="h-4 w-4 inline mr-1" />
+                公益课堂
+              </Link>
+              <Link
+                href="/members"
+                className="px-3 py-2 text-sm font-medium text-gray-600 rounded-lg hover:bg-rose-50 hover:text-rose-600 transition-all"
+              >
+                <Star className="h-4 w-4 inline mr-1" />
+                会员风采
+              </Link>
+              <Link
+                href="/vision"
+                className="px-3 py-2 text-sm font-medium text-gray-600 rounded-lg hover:bg-rose-50 hover:text-rose-600 transition-all"
+              >
+                <Globe className="h-4 w-4 inline mr-1" />
+                展望未来
+              </Link>
+              <Link
+                href="/contact"
+                className="px-3 py-2 text-sm font-medium text-gray-600 rounded-lg hover:bg-rose-50 hover:text-rose-600 transition-all"
+              >
+                <Mail className="h-4 w-4 inline mr-1" />
+                联系我们
               </Link>
             </nav>
           </div>
 
           {/* Search Bar */}
-          <div className="hidden lg:flex flex-1 max-w-md mx-8">
+          <div className="hidden xl:flex flex-1 max-w-md mx-4">
             <div className="relative flex-1">
               <Search className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
               <input
@@ -54,10 +91,10 @@ export function Header() {
           <div className="flex items-center gap-3">
             <Link
               href="/upload"
-              className="flex items-center gap-2 rounded-full bg-gradient-to-r from-rose-600 to-purple-600 px-5 py-2.5 text-sm font-medium text-white shadow-lg shadow-rose-500/25 hover:shadow-xl hover:shadow-rose-500/30 transition-all hover:-translate-y-0.5"
+              className="hidden sm:flex items-center gap-2 rounded-full bg-gradient-to-r from-rose-600 to-purple-600 px-4 py-2.5 text-sm font-medium text-white shadow-lg shadow-rose-500/25 hover:shadow-xl hover:shadow-rose-500/30 transition-all hover:-translate-y-0.5"
             >
               <Plus className="h-4 w-4" />
-              <span className="hidden sm:inline">发布视频</span>
+              <span>发布视频</span>
             </Link>
           </div>
         </div>
