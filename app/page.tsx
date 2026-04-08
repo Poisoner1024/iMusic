@@ -5,7 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Header } from '@/components/Header'
 import { VideoCard } from '@/components/VideoCard'
-import { CategoryFilter } from '@/components/CategoryFilter'
+import { VideoCategoryFilter } from '@/components/VideoCategoryFilter'
 import { 
   Container, Section, HeroSection, Heading1, Heading2, Heading3, BodyText, Caption,
   StatNumber, TagCloud, QuoteCard, ProgramCard, GridLayout, HeroGrid
@@ -83,18 +83,50 @@ export default function Home() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    const loadedVideos = getVideos()
-    setVideos(loadedVideos)
-    setCategories(getCategories(loadedVideos))
-    setLoading(false)
+    const fetchVideos = async () => {
+      try {
+        const response = await fetch('/api/videos')
+        const data = await response.json()
+        if (data.videos && data.videos.length > 0) {
+          setVideos(data.videos)
+          setCategories(getCategories(data.videos))
+        } else {
+          // 如果后端没有数据，使用mock数据作为fallback
+          setVideos(mockVideos)
+          setCategories(getCategories(mockVideos))
+        }
+      } catch (error) {
+        console.error('Failed to fetch videos:', error)
+        // 出错时使用mock数据
+        setVideos(mockVideos)
+        setCategories(getCategories(mockVideos))
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchVideos()
   }, [])
 
   useEffect(() => {
     const handleStorageChange = () => {
-      const loadedVideos = getVideos()
-      setVideos(loadedVideos)
-      setCategories(getCategories(loadedVideos))
+      // 监听storage变化，重新加载视频列表
+      fetchVideos()
     }
+
+    const fetchVideos = async () => {
+      try {
+        const response = await fetch('/api/videos')
+        const data = await response.json()
+        if (data.videos && data.videos.length > 0) {
+          setVideos(data.videos)
+          setCategories(getCategories(data.videos))
+        }
+      } catch (error) {
+        console.error('Failed to fetch videos on storage change:', error)
+      }
+    }
+
     window.addEventListener('storage', handleStorageChange)
     return () => window.removeEventListener('storage', handleStorageChange)
   }, [])
@@ -126,39 +158,39 @@ export default function Home() {
 
         {/* Hero 内容 */}
         <Container>
-          <div className="text-center text-white pt-32 pb-20">
-            {/* 核心 Slogan */}
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight mb-6">
+          <div className="text-center text-white pt-24 md:pt-32 pb-16 md:pb-20 px-4">
+            {/* 核心 Slogan - 移动端缩小字体 */}
+            <h1 className="text-3xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight mb-4 md:mb-6">
               <span className="block bg-gradient-to-r from-amber-300 via-rose-300 to-purple-300 bg-clip-text text-transparent drop-shadow-2xl">
                 让每个家庭都能享受音乐的美好
               </span>
             </h1>
             
-            {/* 副标题 */}
-            <Caption className="mb-8 text-lg md:text-xl tracking-widest uppercase text-white/80">
+            {/* 副标题 - 移动端缩小 */}
+            <Caption className="mb-6 md:mb-8 text-base md:text-lg lg:text-xl tracking-widest uppercase text-white/80">
               MUSIC HAPPY TO LIFE HAPPINESS
             </Caption>
             
-            {/* 理念标语 */}
-            <BodyText className="mb-12 max-w-3xl mx-auto text-white/90 text-lg">
+            {/* 理念标语 - 移动端缩小 */}
+            <BodyText className="mb-8 md:mb-12 max-w-3xl mx-auto text-white/90 text-base md:text-lg leading-relaxed">
               言传不如身教，身教不如境教
               <span className="block mt-2 text-white/70">— 向前一步，让音乐传递爱与快乐</span>
             </BodyText>
 
-            {/* CTA 按钮 */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
-              <Link href="/about" className="btn-primary">
-                <BookOpen className="h-5 w-5" />
+            {/* CTA 按钮 - 移动端增大触摸区域 */}
+            <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center mb-12 md:mb-16">
+              <Link href="/about" className="btn-primary px-6 py-3 md:px-8 md:py-4 text-base md:text-lg">
+                <BookOpen className="h-5 w-5 md:h-6 md:w-6" />
                 了解社团
               </Link>
-              <Link href="/join" className="btn-outline text-white border-white hover:bg-white hover:text-gray-900">
-                <Users2 className="h-5 w-5" />
+              <Link href="/join" className="btn-outline px-6 py-3 md:px-8 md:py-4 text-base md:text-lg text-white border-white hover:bg-white hover:text-gray-900">
+                <Users2 className="h-5 w-5 md:h-6 md:w-6" />
                 申请加入
               </Link>
             </div>
 
-            {/* 社团数字亮点栏 */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
+            {/* 社团数字亮点栏 - 移动端 2 列 */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 max-w-4xl mx-auto">
               {[
                 { number: '100+', label: '会员家庭' },
                 { number: '16+', label: '活动场次' },
@@ -166,8 +198,8 @@ export default function Home() {
                 { number: '5+', label: '覆盖城市' },
               ].map((stat, idx) => (
                 <div key={idx} className="text-center">
-                  <div className="text-3xl md:text-4xl font-bold text-white mb-2">{stat.number}</div>
-                  <div className="text-sm text-white/80 uppercase tracking-wider">{stat.label}</div>
+                  <div className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-1 md:mb-2">{stat.number}</div>
+                  <div className="text-xs md:text-sm text-white/80 uppercase tracking-wider">{stat.label}</div>
                 </div>
               ))}
             </div>
@@ -334,24 +366,29 @@ export default function Home() {
       </Section>
 
       {/* 视频板块 */}
-      <Section>
+      <Section className="bg-gradient-to-br from-purple-50/40 via-blue-50/30 to-cyan-50/40">
         <Container>
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-8">
-            <div>
-              <Caption className="text-primary-600 font-semibold tracking-wider uppercase mb-3">
-                Music Videos
-              </Caption>
-              <Heading2>
-                精选视频
-              </Heading2>
-            </div>
-            <CategoryFilter
-              videos={videos}
-              selectedCategory={selectedCategory}
-              onCategoryChange={setSelectedCategory}
-            />
+          {/* Section Header */}
+          <div className="text-center mb-8">
+            <Caption className="text-primary-600 font-semibold tracking-wider uppercase mb-3">
+              Music Videos
+            </Caption>
+            <Heading2>
+              精选视频
+            </Heading2>
+            <BodyText className="max-w-2xl mx-auto mt-3">
+              探索不同乐器的精彩演奏，感受音乐带来的无限可能
+            </BodyText>
           </div>
 
+          {/* 乐器筛选 - 从属于精选视频 */}
+          <VideoCategoryFilter
+            videos={videos}
+            selectedCategory={selectedCategory}
+            onCategoryChange={setSelectedCategory}
+          />
+
+          {/* 视频网格 */}
           {loading ? (
             <div className="flex items-center justify-center py-20">
               <div className="h-8 w-8 animate-spin rounded-full border-4 border-primary-600 border-t-transparent" />

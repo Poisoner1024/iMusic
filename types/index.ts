@@ -10,7 +10,6 @@ export interface Video {
   uploadedAt: string
   views: number
   likes: number
-  category: string
   tags: string[]
 }
 

@@ -4,7 +4,6 @@ import { useState } from 'react'
 import { ArrowLeft, Upload, X, Check, Loader2, Music, Film, Info, Users, Globe } from 'lucide-react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { addVideo } from '@/lib/videoStore'
 import { Video } from '@/types'
 
 export default function UploadPage() {
@@ -16,7 +15,6 @@ export default function UploadPage() {
     title: '',
     description: '',
     performer: '',
-    instrument: 'piano',
     category: 'piano',
     tags: '',
   })
@@ -66,29 +64,59 @@ export default function UploadPage() {
 
     setIsUploading(true)
     try {
-      await new Promise((resolve) => setTimeout(resolve, 2000))
-      
-      const newVideo: Video = {
-        id: Date.now().toString(),
-        title: formData.title,
-        description: formData.description,
-        thumbnail: 'https://images.unsplash.com/photo-1514117445516-2ecfc9c4ec90?w=800&h=450&fit=crop',
-        videoUrl: '#',
-        performer: formData.performer,
-        instrument: instruments.find(i => i.id === formData.instrument)?.name || '其他',
-        duration: '0:00',
-        uploadedAt: new Date().toISOString().split('T')[0],
-        views: 0,
-        likes: 0,
-        category: formData.category,
-        tags: formData.tags ? formData.tags.split(',').map(t => t.trim()) : [],
+      // 1. 获取COS上传凭证
+      const uploadResponse = await fetch('/api/videos/upload-url', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          fileName: selectedFile.name,
+          fileType: selectedFile.type,
+          contentLength: selectedFile.size,
+        }),
+      })
+
+      if (!uploadResponse.ok) {
+        throw new Error('获取上传凭证失败')
       }
-      
-      addVideo(newVideo)
+
+      const { uploadUrl, videoKey, videoId } = await uploadResponse.json()
+
+      // 2. 上传视频文件到COS
+      const uploadResult = await fetch(uploadUrl, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': selectedFile.type,
+        },
+        body: selectedFile,
+      })
+
+      if (!uploadResult.ok) {
+        throw new Error('视频上传失败')
+      }
+
+      // 3. 创建视频记录（状态为processing）
+      const saveResponse = await fetch('/api/videos', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          title: formData.title,
+          description: formData.description,
+          performer: formData.performer,
+          category: formData.category,
+          tags: formData.tags,
+          videoKey,
+          videoId,
+        }),
+      })
+
+      if (!saveResponse.ok) {
+        throw new Error('保存视频信息失败')
+      }
+
       setStep(3)
     } catch (error) {
       console.error('Upload error:', error)
-      alert('上传失败，请重试')
+      alert(`上传失败: ${error instanceof Error ? error.message : '未知错误'}`)
     } finally {
       setIsUploading(false)
     }
@@ -102,7 +130,6 @@ export default function UploadPage() {
       title: '',
       description: '',
       performer: '',
-      instrument: 'piano',
       category: 'piano',
       tags: '',
     })
@@ -310,11 +337,11 @@ export default function UploadPage() {
                       乐器类型 <span className="text-rose-500">*</span>
                     </label>
                     <select
-                      value={formData.instrument}
+                      value={formData.category}
                       onChange={(e) =>
                         setFormData({
                           ...formData,
-                          instrument: e.target.value,
+                          category: e.target.value,
                         })
                       }
                       className="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3.5 focus:border-rose-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-rose-500/20 transition-all"

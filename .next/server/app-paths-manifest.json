@@ -1,7 +1,10 @@
 {
   "/page": "app/page.js",
+  "/members/page": "app/members/page.js",
+  "/api/videos/route": "app/api/videos/route.js",
+  "/about/page": "app/about/page.js",
+  "/activities/page": "app/activities/page.js",
   "/join/page": "app/join/page.js",
-  "/vision/page": "app/vision/page.js",
-  "/contact/page": "app/contact/page.js",
-  "/about/page": "app/about/page.js"
+  "/classes/page": "app/classes/page.js",
+  "/vision/page": "app/vision/page.js"
 }
