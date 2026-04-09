@@ -62,7 +62,7 @@ export async function handleVideoProcessing(event: SCFEvent) {
     await cleanupTempFiles([tempVideoPath, thumbnailPath])
     
     // 7. 更新数据库记录
-    const { query } = await import('../db')
+    const { query } = await import('./db')
     await query(
       `UPDATE videos 
        SET duration = $1, 
@@ -94,7 +94,7 @@ export async function handleVideoProcessing(event: SCFEvent) {
     
     // 更新数据库状态为失败
     try {
-      const { query } = await import('../db')
+      const { query } = await import('./db')
       await query(
         `UPDATE videos SET status = 'failed' WHERE id = $1`,
         [videoId]

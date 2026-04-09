@@ -10,8 +10,9 @@ export async function GET() {
       memory: process.memoryUsage(),
     })
   } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : String(error)
     return NextResponse.json(
-      { error: 'Health check failed', details: error.message },
+      { error: 'Health check failed', details: errorMessage },
       { status: 500 }
     )
   }

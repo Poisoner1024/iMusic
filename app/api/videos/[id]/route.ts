@@ -20,7 +20,7 @@ export async function GET(
         thumbnail_url as "thumbnail",
         video_url as "videoUrl",
         performer,
-        instrument_category as instrument,
+        instrument_category as category,
         duration,
         uploaded_at as "uploadedAt",
         views,

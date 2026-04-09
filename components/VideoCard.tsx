@@ -42,7 +42,7 @@ export function VideoCard({ video }: VideoCardProps) {
             {video.duration}
           </div>
           <div className="absolute top-2 md:top-4 left-2 md:left-4 rounded-xl md:rounded-2xl bg-gradient-to-r from-purple-600/90 to-blue-600/90 backdrop-blur-sm px-2 md:px-3 py-1 md:py-2 text-xs md:text-sm text-white border border-white/20">
-            {video.instrument}
+            {video.category}
           </div>
         </div>
 
@@ -64,7 +64,7 @@ export function VideoCard({ video }: VideoCardProps) {
               </div>
               <div className="flex items-center gap-1 md:gap-2 px-2 md:px-3 py-1 rounded-xl md:rounded-2xl bg-gradient-to-r from-blue-100 to-cyan-100 border border-blue-200/50">
                 <Globe className="h-3 w-3 md:h-4 md:w-4 text-blue-600" />
-                <span className="text-xs md:font-medium text-blue-700">{video.instrument}</span>
+                <span className="text-xs md:font-medium text-blue-700">{video.category}</span>
               </div>
             </div>
           </div>

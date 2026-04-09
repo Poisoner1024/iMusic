@@ -38,7 +38,7 @@ export async function getConnection(): Promise<PoolClient> {
 /**
  * 执行查询（自动释放连接）
  */
-export async function query<T = any>(
+export async function query<T extends Record<string, any> = Record<string, any>>(
   sql: string,
   params?: any[]
 ): Promise<QueryResult<T>> {
@@ -55,7 +55,7 @@ export async function query<T = any>(
  * 执行事务
  * @param callback 事务回调函数
  */
-export async function transaction<T>(
+export async function transaction<T extends Record<string, any>>(
   callback: (client: PoolClient) => Promise<T>
 ): Promise<T> {
   const client = await getConnection()

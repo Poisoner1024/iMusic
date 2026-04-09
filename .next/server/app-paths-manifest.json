@@ -1,10 +1,10 @@
 {
   "/page": "app/page.js",
-  "/members/page": "app/members/page.js",
-  "/api/videos/route": "app/api/videos/route.js",
-  "/about/page": "app/about/page.js",
-  "/activities/page": "app/activities/page.js",
   "/join/page": "app/join/page.js",
-  "/classes/page": "app/classes/page.js",
-  "/vision/page": "app/vision/page.js"
+  "/api/videos/route": "app/api/videos/route.js",
+  "/upload/page": "app/upload/page.js",
+  "/video/[id]/page": "app/video/[id]/page.js",
+  "/api/videos/upload-url/route": "app/api/videos/upload-url/route.js",
+  "/api/videos/[id]/route": "app/api/videos/[id]/route.js",
+  "/api/videos/[id]/views/route": "app/api/videos/[id]/views/route.js"
 }

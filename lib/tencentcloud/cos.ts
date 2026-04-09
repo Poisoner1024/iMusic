@@ -17,7 +17,7 @@ const COS_CONFIG = {
 }
 
 // 创建S3客户端（腾讯云COS兼容AWS S3协议）
-const s3Client = new S3Client(COS_CONFIG)
+export const s3Client = new S3Client(COS_CONFIG)
 
 // 存储桶名称
 const BUCKET = process.env.COS_BUCKET || ''

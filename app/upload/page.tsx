@@ -433,7 +433,7 @@ export default function UploadPage() {
                   <div className="flex">
                     <dt className="w-20 text-sm text-gray-500">乐器:</dt>
                     <dd className="flex-1 text-sm font-semibold text-gray-900">
-                      {instruments.find((i) => i.id === formData.instrument)?.name}
+                      {instruments.find((i) => i.id === formData.category)?.name}
                     </dd>
                   </div>
                 </dl>

@@ -1,0 +1,58 @@
+{
+  "environmentVariables": [
+    {
+      "key": "DATABASE_URL",
+      "value": "postgresql://imusic_user:********@sh-postgres-6bpqmb8q.sql.tencentcdb.com:21079/imusic_db",
+      "type": "plain",
+      "description": "PostgreSQL数据库连接字符串"
+    },
+    {
+      "key": "COS_SECRET_ID",
+      "value": "********",
+      "type": "secret",
+      "description": "腾讯云COS SecretId"
+    },
+    {
+      "key": "COS_SECRET_KEY",
+      "value": "********",
+      "type": "secret",
+      "description": "腾讯云COS SecretKey"
+    },
+    {
+      "key": "COS_BUCKET",
+      "value": "imusic-videos-iris-1390612299",
+      "type": "plain",
+      "description": "COS存储桶名称"
+    },
+    {
+      "key": "COS_REGION",
+      "value": "ap-shanghai",
+      "type": "plain",
+      "description": "COS地域"
+    },
+    {
+      "key": "VIDEO_PROCESS_NAME",
+      "value": "iMusic-processing",
+      "type": "plain",
+      "description": "SCF云函数名称"
+    },
+    {
+      "key": "NEXT_PUBLIC_APP_URL",
+      "value": "https://your-domain.pages.edgeone.site",
+      "type": "plain",
+      "description": "应用URL（部署后需要更新为实际域名）"
+    },
+    {
+      "key": "MAX_FILE_SIZE",
+      "value": "104857600",
+      "type": "plain",
+      "description": "最大文件大小（100MB）"
+    }
+  ],
+  "notes": [
+    "部署成功后，请将 NEXT_PUBLIC_APP_URL 更新为实际分配的域名",
+    "COS_SECRET_ID 和 COS_SECRET_KEY 必须设置为敏感变量",
+    "确保PostgreSQL数据库已配置白名单，允许EdgeOne Pages访问",
+    "确保COS存储桶已配置CORS，允许pages.edgeone.site域名访问"
+  ]
+}

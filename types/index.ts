@@ -5,7 +5,7 @@ export interface Video {
   thumbnail: string
   videoUrl: string
   performer: string
-  instrument: string
+  category: string
   duration: string
   uploadedAt: string
   views: number

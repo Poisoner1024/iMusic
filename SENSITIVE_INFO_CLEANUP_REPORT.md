@@ -9,12 +9,12 @@ iMusic项目中的所有文档、脚本和配置文件（除了.env.local）
 ## 已删除的敏感信息
 
 ### 1. 数据库连接信息
-- **数据库URL**: `postgresql://imusic_user:P%40ss_170903@sh-postgres-6bpqmb8q.sql.tencentcdb.com:21079/imusic_db`
+- **数据库URL**: `postgresql://imusic_user:********@sh-postgres-6bpqmb8q.sql.tencentcdb.com:21079/imusic_db`
 - **涉及文件**: 19个文档和脚本文件
 
 ### 2. COS凭证信息
-- **SecretId**: `AKIDYLwTo8LSQ8cJqCh8ar1BB6rdFlImGk3I`
-- **SecretKey**: `GUgjnhVBnLiInGi1A7yqjmfZUesx7Oi7`
+- **SecretId**: `********`
+- **SecretKey**: `********`
 - **存储桶名称**: `imusic-videos-iris-1390612299`
 - **涉及文件**: 17个文档和脚本文件
 
@@ -110,11 +110,11 @@ iMusic项目中的所有文档、脚本和配置文件（除了.env.local）
 
 ```bash
 # 搜索数据库连接字符串
-grep -r "postgresql://imusic_user:P%40ss_170903" /workspace/iMusic --exclude-dir=node_modules
+grep -r "postgresql://imusic_user:********" /workspace/iMusic --exclude-dir=node_modules
 # 结果: 无匹配（仅在.env.local中）
 
 # 搜索COS SecretId
-grep -r "AKIDYLwTo8LSQ8cJqCh8ar1BB6rdFlImGk3I" /workspace/iMusic --exclude-dir=node_modules
+grep -r "********" /workspace/iMusic --exclude-dir=node_modules
 # 结果: 无匹配（仅在.env.local中）
 
 # 搜索存储桶名称
